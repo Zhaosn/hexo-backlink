@@ -55,7 +55,7 @@ function action(data) {
           // For links with anchor, use direct HTML link to preserve anchor
           content = content.replace(
             linkName,
-            `<a href="../${file.articleName}#${anchor}">${showName || realName}</a>`,
+            `<a href="../${file.articleName}#${anchor}">${showName || realName} > ${anchor}</a>`,
           );
         } else {
           // For regular links, use post_link tag
