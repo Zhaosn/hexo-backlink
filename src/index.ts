@@ -51,13 +51,19 @@ function action(data) {
       let file = fileList.find((file) => file.fileNameExt === realNameExt);
       if (file) {
         // If the target article was found. then replace the backlink with 'post_link'
-        content = content.replace(
-          linkName,
-          // `<a href="${file.articleName}${
-          //   anchor ? "#" + anchor : ""
-          // }" name="${realName}" id="huiqu">${showName || realName}</a>`
-          `{% post_link ${file.articleName} '${showName || realName}' %}`,
-        );
+        if (anchor) {
+          // For links with anchor, use direct HTML link to preserve anchor
+          content = content.replace(
+            linkName,
+            `<a href="../${file.articleName}#${anchor}">${showName || realName}</a>`,
+          );
+        } else {
+          // For regular links, use post_link tag
+          content = content.replace(
+            linkName,
+            `{% post_link ${file.articleName} '${showName || realName}' %}`,
+          );
+        }
       }
     });
   }
