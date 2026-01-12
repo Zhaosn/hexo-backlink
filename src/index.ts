@@ -48,12 +48,7 @@ function action(data) {
       let anchor = null;
       [realName, anchor] = realName.split("#");
       let realNameExt = realName + ".md";
-      // Priority matching of complete paths, and files in folders are supported
-      let file = fileList.find((file) => file.articleName === realName);
-      // If not found, try matching the file name again (compatible with the original logic)
-      if (!file) {
-        file = fileList.find((file) => file.fileNameExt === realNameExt);
-      }
+      let file = fileList.find((file) => file.fileNameExt === realNameExt);
       if (file) {
         // If the target article was found. then replace the backlink with 'post_link'
         if (anchor) {
