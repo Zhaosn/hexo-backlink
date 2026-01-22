@@ -91,9 +91,11 @@ function action(data) {
         // If the target article was found. then replace the backlink with 'post_link'
         if (anchor) {
           // For links with anchor, use direct HTML link to preserve anchor
+          // Replace underscores, dots and spaces with hyphens in anchor
+          const formattedAnchor = anchor.replace(/[_\. ]/g, '-');
           content = content.replace(
             linkName,
-            `<a href="/${file.articleName}#${anchor}">${showName || realName.replace(/^(\.\.\/)+/, '').replace(/^\.\//, '')} > ${anchor}</a>`,
+            `<a href="/${file.articleName}#${formattedAnchor}">${showName || realName.replace(/^(\.\.\/)+/, '').replace(/^\.\//, '')} > ${anchor}</a>`,
           );
         } else {
           // For regular links, use post_link tag
